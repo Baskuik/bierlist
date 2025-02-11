@@ -14,15 +14,7 @@ if ($conn->connect_error) {
 $sql = "SELECT id, name, brewer, type, yeast, perc, purchase_price, like_count FROM beers";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) 
-  echo "<style>
-          .beer-item {
-            border: 2px solid black;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-          }
-        </style>";
+
 
 while($row = $result->fetch_assoc()) {
   echo "<div class='beer-item'>";
