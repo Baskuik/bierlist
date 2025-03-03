@@ -117,22 +117,7 @@ $result = $conn->query($sql);
 
     </div>
 
-    <script>
-        function likeBeer(beerId) {
-          $.ajax({
-    url: 'like.php',  // Make sure the file exists here
-    type: 'POST',
-    data: { id: beerId },
-    success: function(response) {
-        console.log("Server response:", response);
-    },
-    error: function(xhr, status, error) {
-        console.error("AJAX Error:", xhr.status, error);
-    }
-});
-
-        }
-    </script>
+ 
 
 </body>
 </html>
