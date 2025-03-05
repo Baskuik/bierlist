@@ -1,3 +1,6 @@
+<?php
+ include "connect.php";
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -47,11 +50,12 @@
 <body>
     <div class="login-container">
         <h2>Inloggen</h2>
-        <form>
-            <input type="text" placeholder="Gebruikersnaam" required>
-            <input type="password" placeholder="Wachtwoord" required>
+        <form id="inloggen" method="post" action="/login.php">
+            <input type="text" placeholder="Email" name="email" id="email" required>
+            <input type="password" placeholder="Wachtwoord" name="password" id="password" required>
             <button type="submit">Login</button>
         </form>
     </div>
 </body>
 </html>
+
