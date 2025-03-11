@@ -1,21 +1,11 @@
-    <?php
-    session_start(); // Start sessie om gebruikers te identificeren
+        <?php
+      include "connect.php";    
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "bierlist";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Verbinding mislukt: " . $conn->connect_error);
-    }
-
-    // Simuleer ingelogde gebruiker (in een echt systeem haal je dit uit de database)
-    if (!isset($_SESSION['user_id'])) {
-        $_SESSION['user_id'] = rand(1, 1000); // Simuleer een willekeurige gebruiker
-    }
-    $user_id = $_SESSION['user_id'];
+        // Simuleer ingelogde gebruiker (in een echt systeem haal je dit uit de database)
+        if (!isset($_SESSION['user_id'])) {
+            $_SESSION['user_id'] = rand(1, 1000); // Simuleer een willekeurige gebruiker
+        }
+        $user_id = $_SESSION['user_id'];
 
     // Haal de bieren op en check of de gebruiker al heeft geliked
     $sql = "SELECT id, name, brewer, type, yeast, perc, purchase_price, stars FROM beers";
@@ -171,3 +161,4 @@
 
     </body>
     </html>
+    

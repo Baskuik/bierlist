@@ -1,15 +1,13 @@
 <?php
 $servername = "localhost";
-$username = "";
-$password = "root";
-$db = "bierlist";
+$username = "root";
+$password = "";
+$database = "bierlist";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $database);
 
-// Check connection
+// Controleer of de verbinding werkt
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Verbinding mislukt: " . $conn->connect_error);
 }
-echo "Connected successfully";
 ?>
