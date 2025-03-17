@@ -1,6 +1,37 @@
 <?php
 include "connect.php";
+session_start();
+
+$fout = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    //zoekt gebruiker in de database
+    $query = "SELECT * FROM gebruikers WHERE email = '$email'";
+    $resultaat = $conn->query($query);
+
+    if ($resultaat->num_rows == 1) {
+        $gebruiker = $resultaat->fetch_assoc();
+
+        // Debugging
+        //echo "Wachtwoord uit de database: " . $gebruiker['password'] . "<br>";
+
+        //controleert of het ingevoerde wachtwoord overeenkomt met het gehashte wachtwoord
+        if (password_verify($password, $gebruiker['password'])) {
+            $_SESSION['email'] = $email;
+            header("Location: index.php"); 
+            exit();
+        } else {
+            $fout = "Ongeldig wachtwoord!";
+        }
+    } else {
+        $fout = "Geen account gevonden met dit e-mailadres!";
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -57,13 +88,14 @@ include "connect.php";
 <body>
     <div class="login-container">
         <h2>Inloggen</h2>
-        <?php if (isset($_GET['error'])) { ?>
-     	<b style="color: #f00;"><?=$_GET['error']?></b><br>
+        <?php if (isset($fout)) { ?>
+     	<b style="color: #f00;"><?php echo $fout; ?></b><br>
       <?php } ?>
-        <form id="inloggen" method="post" action="/login">
-            <input type="text" placeholder="Email" name="email" id="email" required>
+        <form method="POST" action="login.php">
+            <input type="email" placeholder="Email" name="email" id="email" required>
             <input type="password" placeholder="Wachtwoord" name="password" id="password" required>
-            <input type ="submit" value="Login" id="submit"></input>
+            <input type="submit" value="Login" id="submit">
+            <a href="registration.php">Registeren</a>
         </form>
     </div>
 </body>

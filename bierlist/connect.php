@@ -2,11 +2,12 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "bierlist";
+$dbname = "bierlist"; // De naam van de database
 
-$conn = new mysqli($servername, $username, $password, $database);
+// Maak verbinding
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Controleer of de verbinding werkt
+// Controleer de verbinding
 if ($conn->connect_error) {
     die("Verbinding mislukt: " . $conn->connect_error);
 }
